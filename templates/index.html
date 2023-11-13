@@ -138,6 +138,10 @@
                 <div class="card-body">
                   <form id="data-form">
                         <div class="row">
+                          <div class="col-md-6">
+                            <label class="mb-0" for="header4">ชื่อ</label>
+                            <input type="text" id="header4" required name="header1" placeholder="ใส่ชื่อผู้เข้าพัก" class="form-control">
+                          </div>
                             <div class="col-md-6">
                                 <label class="mb-0" for="header1">ตึกที่</label>
                                 <input type="text" id="header1" required name="header1" placeholder="ใส่เลขตึก" class="form-control">
@@ -192,31 +196,32 @@
     {% endif %}
 
     <script>
-        document.getElementById('data-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var formData = new FormData(this);
-            // Use AJAX to send form data to the server
-            fetch('/submit', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle JSON response from the server
-                if (data.status === 'success') {
-                    alert('Form submitted successfully!');
-                    // Redirect to index2.html after displaying the alert
-                    window.location.href = '/index2';
-                } else {
-                    alert('Form submission failed. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Form submission failed. Please try again.');
-            });
-        });
-    </script>
+      document.getElementById('data-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+          var formData = new FormData(this);
+
+          // Use AJAX to send form data to the server
+          fetch('/submit', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Handle JSON response from the server
+              if (data.status === 'success') {
+                  alert('Form submitted successfully!');
+                  // Redirect to index2.html after displaying the alert
+                  window.location.href = '/index2';
+              } else {
+                  alert('Form submission failed. Please try again.');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('Form submission failed. Please try again.');
+          });
+      });
+  </script>
 
 </body>
 </html>

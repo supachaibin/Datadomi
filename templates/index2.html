@@ -134,12 +134,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>หมวดหมู่อาหาร</h4>
+                    <h4>ข้อมูลการเข้าพัก</h4>
                 </div>
                 <div class="card-body" >
                     <table id="category_table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th>ชื่อ</th>
                                 <th>ตึกที่</th>
                                 <th>ชั้น</th>
                                 <th>ห้อง</th>
@@ -183,6 +184,7 @@
               const bValue = button.getAttribute('data-b');
               const fValue = button.getAttribute('data-f');
               const rValue = button.getAttribute('data-r');
+              const nValue = button.getAttribute('data-n');
 
               fetch('/delete_row', {
                   method: 'POST',
@@ -195,7 +197,7 @@
               .then(data => {
                   if (data.success) {
                       button.parentElement.parentElement.remove();
-                      alert('Row deleted successfully!');
+                      alert('Do you want to delete!');
                   } else {
                       console.error('Failed to delete row');
                   }
