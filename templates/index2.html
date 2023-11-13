@@ -48,14 +48,7 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
-      <li class="nav-item">
-          <a class="nav-link text-white" href="index.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">dashboard</i>
-            </div>
-            <span class="nav-link-text ms-1">แดชบอร์ด</span>
-          </a>
-        </li>
+  
         <li class="nav-item">
           <a class="nav-link text-white" href="{{ url_for('index2') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -65,62 +58,21 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="{{ url_for('index') }}">
+          <a class="nav-link text-white" href="{{ url_for('index1') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="bi bi-plus-lg"></i>
             </div>
             <span class="nav-link-text ms-1">เพิ่มรายละเอียดห้องพัก</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="member.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">รายชื่อผู้เข้าพักทั้งหมด</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="add-member.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="bi bi-plus-lg"></i>
-            </div>
-            <span class="nav-link-text ms-1">เพิ่มรายชื่อผู้เข้าพัก</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="bill.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="bi bi-people"></i>
-            </div>
-            <span class="nav-link-text ms-1">ข้อมูลค่าน้ำ/ค่าไฟ/ค่าเช่า</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="addbill.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="bi bi-plus-lg"></i>
-            </div>
-            <span class="nav-link-text ms-1">บันทึกการจ่ายค่าเช่า</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="userM.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="bi bi-people"></i>
-            </div>
-            <span class="nav-link-text ms-1">ชื่อผู้ใช้ระบบทั้งหมด</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-        <a class="btn bg-gradient-warning  mt-2 w-100"
-        href="#" type="button">
-        ออกจากระบบ</a>
-      </div>
-    </div>
+        <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+          <div class="mx-3">
+            <a class="btn bg-gradient-warning  mt-2 w-100"
+            href="{{ url_for('logout') }}" type="button">
+            ออกจากระบบ</a>
+          </div>
+        </div>
+        
   </aside>
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
@@ -134,7 +86,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>ข้อมูลการเข้าพัก</h4>
+                    <h4>รายละเอียดห้องพัก</h4>
                 </div>
                 <div class="card-body" >
                     <table id="category_table" class="table table-bordered table-striped">
@@ -144,6 +96,7 @@
                                 <th>ตึกที่</th>
                                 <th>ชั้น</th>
                                 <th>ห้อง</th>
+                                <th>วันที่เข้าอยู่</th>
                                 <th>แอคชั่น</th>
                                 
                             </tr>
@@ -151,14 +104,16 @@
                         <tbody>
                           {% for row in data %}
                                             <tr>
+                                                <td style="width: 300px;">{{ row.n }}</td>
                                                 <td>{{ row.b }}</td>
-                                                <td style="width: 350px;">{{ row.f }}</td>
-                                                <td style="width: 250px;">{{ row.r }}</td> 
+                                                <td style="width: 200px;">{{ row.f }}</td>
+                                                <td style="width: 150px;">{{ row.r }}</td>
+                                                <td>{{ row.date }}</td>
                                                 
                                                     
                                                     <!--<button type="sibmit" class="btn btn-sm btn-danger" data-b="{{ row.b }}" data-f="{{ row.f }}" data-r="{{ row.r }}">ลบ</button>-->
                                                     <td>
-                                                      <button class="delete-btn btn btn-sm btn-danger" data-b="{{ row.b }}" data-f="{{ row.f }}" data-r="{{ row.r }}">ลบ</button>
+                                                      <button class="delete-btn btn btn-sm btn-danger" data-b="{{ row.b }}" data-f="{{ row.f }}" data-r="{{ row.r }}" data-n="{{ row.n }}" data-date="{{ row.date }}">ลบ</button>
                                                   </td>
                       
                                                 
@@ -175,6 +130,7 @@
 
 </main> 
 
+<!-- Include the JavaScript code you provided -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       const deleteButtons = document.querySelectorAll('.delete-btn');
@@ -186,29 +142,34 @@
               const rValue = button.getAttribute('data-r');
               const nValue = button.getAttribute('data-n');
 
+              // Send an AJAX request to delete the row with the specified values
               fetch('/delete_row', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
                   },
-                  body: JSON.stringify({ b: bValue, f: fValue, r: rValue }),
+                  body: JSON.stringify({ b: bValue, f: fValue, r: rValue, n: nValue }),
               })
               .then(response => response.json())
               .then(data => {
                   if (data.success) {
-                      button.parentElement.parentElement.remove();
-                      alert('Do you want to delete!');
+                      // If the deletion is successful, show an alert
+                      alert('Row deleted successfully!');
+                      // You are already on the same page, no need to reload
                   } else {
+                      // Handle error (optional)
                       console.error('Failed to delete row');
                   }
               })
               .catch(error => {
+                  // Handle network error (optional)
                   console.error('Error:', error);
               });
           });
       });
   });
 </script>
+
 
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/perfect-scrollbar.min.js"></script>
