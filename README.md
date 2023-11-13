@@ -1,2 +1,0 @@
-# Datadomi
-this my project
